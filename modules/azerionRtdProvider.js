@@ -31,9 +31,10 @@ export const storage = getStorageManager({
  * @return {String}
  */
 function getScriptURL(config) {
+  const VERSION = 'v1';
   const key = config.params?.key;
   const publisherPath = key ? `${key}/` : '';
-  return `https://publisher-audiences.hyth.io/js/${publisherPath}htpa.min.js`;
+  return `https://pa.hyth.io/js/${VERSION}/${publisherPath}htpa.min.js`;
 }
 
 /**
@@ -46,8 +47,8 @@ function getScriptURL(config) {
 export function attachScript(config) {
   const script = getScriptURL(config);
   loadExternalScript(script, SUBREAL_TIME_MODULE, () => {
-    if (typeof window.runPublisherAudiences === 'function') {
-      window.runPublisherAudiences(config.params?.process || {});
+    if (typeof window.azerionPublisherAudiences === 'function') {
+      window.azerionPublisherAudiences(config.params?.process || {});
     }
   });
 }

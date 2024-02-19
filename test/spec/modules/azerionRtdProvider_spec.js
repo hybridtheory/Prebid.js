@@ -17,12 +17,12 @@ describe('Azerion RTD submodule', function () {
   beforeEach(function () {
     config.resetConfig();
     reqBidsConfigObj = {ortb2Fragments: {bidder: {}}};
-    window.runPublisherAudiences = sinon.spy();
+    window.azerionPublisherAudiences = sinon.spy();
     storageStub = sinon.stub(azerionRTD.storage, 'getDataFromLocalStorage');
   });
 
   afterEach(function () {
-    delete window.runPublisherAudiences;
+    delete window.azerionPublisherAudiences;
     storageStub.restore();
   });
 
@@ -41,18 +41,18 @@ describe('Azerion RTD submodule', function () {
       expect(loadExternalScript.called).to.be.true;
     });
 
-    it('should load external script with default url', function() {
-      const expected = 'https://publisher-audiences.hyth.io/js/htpa.min.js';
+    it('should load external script with default versioned url', function() {
+      const expected = 'https://pa.hyth.io/js/v1/htpa.min.js';
       expect(loadExternalScript.args[0][0]).to.deep.equal(expected);
     });
 
-    it('should call runPublisherAudiencesStub with empty configuration', function() {
-      expect(window.runPublisherAudiences.args[0][0]).to.deep.equal({});
+    it('should call azerionPublisherAudiencesStub with empty configuration', function() {
+      expect(window.azerionPublisherAudiences.args[0][0]).to.deep.equal({});
     });
 
     describe('with key', function() {
       beforeEach(function() {
-        window.runPublisherAudiences.resetHistory();
+        window.azerionPublisherAudiences.resetHistory();
         loadExternalScript.resetHistory();
         returned = azerionRTD.azerionSubmodule.init({...dataProvider, params: {key}});
       })
@@ -62,14 +62,14 @@ describe('Azerion RTD submodule', function () {
       });
 
       it('should load external script with publisher id url', function() {
-        const expected = `https://publisher-audiences.hyth.io/js/${key}/htpa.min.js`;
+        const expected = `https://pa.hyth.io/js/v1/${key}/htpa.min.js`;
         expect(loadExternalScript.args[0][0]).to.deep.equal(expected);
       });
     });
 
     describe('with process configuration', function() {
       beforeEach(function() {
-        window.runPublisherAudiences.resetHistory();
+        window.azerionPublisherAudiences.resetHistory();
         loadExternalScript.resetHistory();
         returned = azerionRTD.azerionSubmodule.init({...dataProvider, params: {process}});
       })
@@ -78,8 +78,8 @@ describe('Azerion RTD submodule', function () {
         expect(returned).to.equal(true);
       });
 
-      it('should call runPublisherAudiencesStub with process configuration', function() {
-        expect(window.runPublisherAudiences.args[0][0]).to.deep.equal(process);
+      it('should call azerionPublisherAudiencesStub with process configuration', function() {
+        expect(window.azerionPublisherAudiences.args[0][0]).to.deep.equal(process);
       });
     });
   });
