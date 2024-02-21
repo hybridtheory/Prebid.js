@@ -42,7 +42,7 @@ describe('Azerion RTD submodule', function () {
     });
 
     it('should load external script with default versioned url', function() {
-      const expected = 'edge.hyth.io/js/v1/azerion-edge.min.js';
+      const expected = 'https://edge.edge.hyth.io/js/v1/azerion-edge.min.js';
       expect(loadExternalScript.args[0][0]).to.deep.equal(expected);
     });
 
