@@ -110,7 +110,3 @@ Run the unit tests:
 ```bash
 npm test -- --file "test/spec/modules/azerionedgeRtdProvider_spec.js"
 ```
-
-## Support
-
-If you require further assistance please contact [support@azerion.com](mailto:support@azerion.com).
