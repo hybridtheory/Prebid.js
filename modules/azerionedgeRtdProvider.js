@@ -134,10 +134,10 @@ export function getBidRequestData(
 }
 
 /** @type {RtdSubmodule} */
-export const azerionSubmodule = {
+export const azerionedgeSubmodule = {
   name: SUBREAL_TIME_MODULE,
   init: init,
   getBidRequestData: getBidRequestData,
 };
 
-submodule(REAL_TIME_MODULE, azerionSubmodule);
+submodule(REAL_TIME_MODULE, azerionedgeSubmodule);

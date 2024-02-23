@@ -1,5 +1,5 @@
 import { config } from 'src/config.js';
-import * as azerionRTD from 'modules/azerionedgeRtdProvider.js';
+import * as azerionedgeRTD from 'modules/azerionedgeRtdProvider.js';
 import { loadExternalScript } from '../../../src/adloader.js';
 
 describe('Azerion Edge RTD submodule', function () {
@@ -20,12 +20,12 @@ describe('Azerion Edge RTD submodule', function () {
   beforeEach(function () {
     config.resetConfig();
     reqBidsConfigObj = { ortb2Fragments: { bidder: {} } };
-    window.azerionPublisherAudiences = sinon.spy();
-    storageStub = sinon.stub(azerionRTD.storage, 'getDataFromLocalStorage');
+    window.azerionEdgePublisherAudiences = sinon.spy();
+    storageStub = sinon.stub(azerionedgeRTD.storage, 'getDataFromLocalStorage');
   });
 
   afterEach(function () {
-    delete window.azerionPublisherAudiences;
+    delete window.azerionEdgePublisherAudiences;
     storageStub.restore();
   });
 
@@ -33,7 +33,7 @@ describe('Azerion Edge RTD submodule', function () {
     let returned;
 
     beforeEach(function () {
-      returned = azerionRTD.azerionSubmodule.init(dataProvider);
+      returned = azerionedgeRTD.azerionedgeSubmodule.init(dataProvider);
     });
 
     it('should return true', function () {
@@ -49,15 +49,15 @@ describe('Azerion Edge RTD submodule', function () {
       expect(loadExternalScript.args[0][0]).to.deep.equal(expected);
     });
 
-    it('should call azerionPublisherAudiencesStub with empty configuration', function () {
-      expect(window.azerionPublisherAudiences.args[0][0]).to.deep.equal({});
+    it('should call azerionEdgePublisherAudiencesStub with empty configuration', function () {
+      expect(window.azerionEdgePublisherAudiences.args[0][0]).to.deep.equal({});
     });
 
     describe('with key', function () {
       beforeEach(function () {
-        window.azerionPublisherAudiences.resetHistory();
+        window.azerionEdgePublisherAudiences.resetHistory();
         loadExternalScript.resetHistory();
-        returned = azerionRTD.azerionSubmodule.init({
+        returned = azerionedgeRTD.azerionedgeSubmodule.init({
           ...dataProvider,
           params: { key },
         });
@@ -75,9 +75,9 @@ describe('Azerion Edge RTD submodule', function () {
 
     describe('with process configuration', function () {
       beforeEach(function () {
-        window.azerionPublisherAudiences.resetHistory();
+        window.azerionEdgePublisherAudiences.resetHistory();
         loadExternalScript.resetHistory();
-        returned = azerionRTD.azerionSubmodule.init({
+        returned = azerionedgeRTD.azerionedgeSubmodule.init({
           ...dataProvider,
           params: { process },
         });
@@ -87,8 +87,8 @@ describe('Azerion Edge RTD submodule', function () {
         expect(returned).to.equal(true);
       });
 
-      it('should call azerionPublisherAudiencesStub with process configuration', function () {
-        expect(window.azerionPublisherAudiences.args[0][0]).to.deep.equal(
+      it('should call azerionEdgePublisherAudiencesStub with process configuration', function () {
+        expect(window.azerionEdgePublisherAudiences.args[0][0]).to.deep.equal(
           process
         );
       });
@@ -104,7 +104,7 @@ describe('Azerion Edge RTD submodule', function () {
 
     describe('with empty storage', function () {
       beforeEach(function () {
-        azerionRTD.azerionSubmodule.getBidRequestData(
+        azerionedgeRTD.azerionedgeSubmodule.getBidRequestData(
           reqBidsConfigObj,
           callbackStub,
           dataProvider
@@ -125,7 +125,7 @@ describe('Azerion Edge RTD submodule', function () {
         storageStub
           .withArgs(STORAGE_KEY)
           .returns(JSON.stringify(USER_AUDIENCES));
-        azerionRTD.azerionSubmodule.getBidRequestData(
+        azerionedgeRTD.azerionedgeSubmodule.getBidRequestData(
           reqBidsConfigObj,
           callbackStub,
           dataProvider
@@ -160,7 +160,7 @@ describe('Azerion Edge RTD submodule', function () {
     };
 
     it('for improvedigital by default', function () {
-      azerionRTD.setAudiencesToBidders(
+      azerionedgeRTD.setAudiencesToBidders(
         reqBidsConfigObj,
         dataProvider,
         audiences
@@ -173,7 +173,7 @@ describe('Azerion Edge RTD submodule', function () {
     bidders.forEach((bidder) => {
       it(`for ${bidder}`, function () {
         const config = { ...dataProvider, params: { bidders } };
-        azerionRTD.setAudiencesToBidders(reqBidsConfigObj, config, audiences);
+        azerionedgeRTD.setAudiencesToBidders(reqBidsConfigObj, config, audiences);
         expect(reqBidsConfigObj.ortb2Fragments.bidder[bidder]).to.deep.equal(
           expected
         );
