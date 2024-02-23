@@ -31,7 +31,7 @@ Compile the Azerion Edge RTD module (`azerionedgeRtdProvider`) into your Prebid 
 along with the parent RTD Module (`rtdModule`):
 
 ```bash
-gulp build --modules=rtdModule,azerionedgeRtdProvider,appnexusBidAdapter,improvedigitalBidAdapter
+gulp build --modules=rtdModule,azerionedgeRtdProvider,improvedigitalBidAdapter
 ```
 
 Set configuration via `pbjs.setConfig`.
