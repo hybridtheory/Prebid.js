@@ -20,12 +20,12 @@ describe('Azerion Edge RTD submodule', function () {
   beforeEach(function () {
     config.resetConfig();
     reqBidsConfigObj = { ortb2Fragments: { bidder: {} } };
-    window.azerionEdgePublisherAudiences = sinon.spy();
+    window.azerionPublisherAudiences = sinon.spy();
     storageStub = sinon.stub(azerionedgeRTD.storage, 'getDataFromLocalStorage');
   });
 
   afterEach(function () {
-    delete window.azerionEdgePublisherAudiences;
+    delete window.azerionPublisherAudiences;
     storageStub.restore();
   });
 
@@ -49,13 +49,13 @@ describe('Azerion Edge RTD submodule', function () {
       expect(loadExternalScript.args[0][0]).to.deep.equal(expected);
     });
 
-    it('should call azerionEdgePublisherAudiencesStub with empty configuration', function () {
-      expect(window.azerionEdgePublisherAudiences.args[0][0]).to.deep.equal({});
+    it('should call azerionPublisherAudiencesStub with empty configuration', function () {
+      expect(window.azerionPublisherAudiences.args[0][0]).to.deep.equal({});
     });
 
     describe('with key', function () {
       beforeEach(function () {
-        window.azerionEdgePublisherAudiences.resetHistory();
+        window.azerionPublisherAudiences.resetHistory();
         loadExternalScript.resetHistory();
         returned = azerionedgeRTD.azerionedgeSubmodule.init({
           ...dataProvider,
@@ -75,7 +75,7 @@ describe('Azerion Edge RTD submodule', function () {
 
     describe('with process configuration', function () {
       beforeEach(function () {
-        window.azerionEdgePublisherAudiences.resetHistory();
+        window.azerionPublisherAudiences.resetHistory();
         loadExternalScript.resetHistory();
         returned = azerionedgeRTD.azerionedgeSubmodule.init({
           ...dataProvider,
@@ -87,8 +87,8 @@ describe('Azerion Edge RTD submodule', function () {
         expect(returned).to.equal(true);
       });
 
-      it('should call azerionEdgePublisherAudiencesStub with process configuration', function () {
-        expect(window.azerionEdgePublisherAudiences.args[0][0]).to.deep.equal(
+      it('should call azerionPublisherAudiencesStub with process configuration', function () {
+        expect(window.azerionPublisherAudiences.args[0][0]).to.deep.equal(
           process
         );
       });
