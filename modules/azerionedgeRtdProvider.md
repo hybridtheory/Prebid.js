@@ -18,6 +18,8 @@ Client-side contextual cookieless audiences.
 Azerion Edge RTD module helps publishers to capture users' interest
 audiences on their site, and attach these into the bid request.
 
+Please contact [edge@azerion.com](edge@azerion.com) for information.
+
 Maintainer: [azerion.com](https://www.azerion.com/)
 
 {:.no_toc}
@@ -64,7 +66,7 @@ pbjs.setConfig(
 | :--- | :------- | :------------------ | :--------------- |
 | name | `String` | RTD sub module name | Always "azerionedge" |
 | waitForIt | `Boolean` | Required to ensure that the auction is delayed for the module to respond. | Optional. Defaults to false but recommended to true. |
-| params.key | `String` | Publisher partner specific key | Optional |
+| params.key | `String` | Publisher partner specific key | Required. The key is required for the module to work. If you haven't received one, please reach [support@improvedigital.com](support@improvedigital.com) |
 | params.bidders | `Array` | Bidders with which to share segment information | Optional. Defaults to "improvedigital". |
 | params.process | `Object` | Configuration for the Azerion Edge script. | Optional. Defaults to `{}`. |
 
