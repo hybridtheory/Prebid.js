@@ -143,6 +143,7 @@ describe('Azerion Edge RTD submodule', function () {
   });
 
   describe('USP acccess', () => {
+    const uspMalformed = -1;
     const uspNotApplicable = '1---';
     const uspUserNotifiedOptedOut = '1YY-';
     const uspUserNotifiedNotOptedOut = '1YN-';
@@ -155,6 +156,7 @@ describe('Azerion Edge RTD submodule', function () {
     const uspUserUnknownNotifiedUnknownOptedOut = '1---';
 
     [
+      ['malformed', uspMalformed, true],
       ['not applicable', uspNotApplicable, true],
       ['not provided', uspNotProvided, true],
       ['user notified and opted out', uspUserNotifiedOptedOut, false],
