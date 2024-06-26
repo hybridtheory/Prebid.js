@@ -40,7 +40,9 @@ describe('Azerion Edge RTD submodule', function () {
     });
 
     it('should have the correct gvlid', () => {
-      expect(returned.gvlid).to.equal(IMPROVEDIGITAL_GVLID);
+      expect(azerionedgeRTD.azerionedgeSubmodule.gvlid).to.equal(
+        IMPROVEDIGITAL_GVLID
+      );
     });
 
     it('should return true', function () {
